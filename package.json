@@ -1,0 +1,35 @@
+{
+  "name": "utube",
+  "version": "1.0.0",
+  "description": "Utube clone built using NodeJS, Express, Mongo and ES6",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Steadystudy/Utube.git"
+  },
+  "author": "MSG",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.4.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "mongoose": "^5.12.14",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
+    "pug": "^3.0.2"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/init.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.4",
+    "nodemon": "^2.0.7"
+  },
+  "bugs": {
+    "url": "https://github.com/Steadystudy/Utube/issues"
+  },
+  "homepage": "https://github.com/Steadystudy/Utube#readme"
+}

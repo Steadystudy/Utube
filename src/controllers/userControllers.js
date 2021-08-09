@@ -87,9 +87,9 @@ export const finishGithubLogin = async (req, res) => {
       },
     })
   ).json();
-  if ("access_token" in json) {
+  if ("access_token" in tokenRequest) {
     const { access_token } = tokenRequest;
-    const apiUrl = "htpps://api.github.com";
+    const apiUrl = "https://api.github.com";
     const userData = await (
       await fetch(`${apiUrl}/user`, {
         headers: {
@@ -97,6 +97,9 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
+    if (userData.name === null) {
+      userData.name = "Unknown";
+    }
     console.log(userData);
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {

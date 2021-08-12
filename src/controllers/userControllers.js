@@ -1,6 +1,7 @@
 import User from "../models/user";
 import fetch from "node-fetch";
 import bcrypt from "bcrypt";
+import Video from "../models/video";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
@@ -100,7 +101,6 @@ export const finishGithubLogin = async (req, res) => {
     if (userData.name === null) {
       userData.name = "Unknown";
     }
-    console.log(userData);
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -108,7 +108,6 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(emailData);
     const emailObj = emailData.find(
       (email) => email.primary === true && email.verified === true
     );
@@ -207,4 +206,13 @@ export const postChangePassword = async (req, res) => {
   user.password = newPassword;
   await user.save();
   return res.redirect("/users/logout");
+};
+
+export const see = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id).populate("videos");
+  if (!user) {
+    return res.status(404), render("404", { pageTitle: "User not Found" });
+  }
+  return res.render("profile", { pageTitle: user.name, user });
 };
